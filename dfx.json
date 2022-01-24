@@ -1,0 +1,35 @@
+{
+  "canisters": {
+    "helloblog": {
+      "main": "src/helloblog/main.mo",
+      "type": "motoko"
+    },
+    "helloblog_assets": {
+      "dependencies": [
+        "helloblog"
+      ],
+      "frontend": {
+        "entrypoint": "src/helloblog_assets/src/index.html"
+      },
+      "source": [
+        "src/helloblog_assets/assets",
+        "dist/helloblog_assets/"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "dfx": "0.8.3",
+  "networks": {
+    "local": {
+      "bind": "127.0.0.1:8000",
+      "type": "ephemeral"
+    }
+  },
+  "version": 1
+}
