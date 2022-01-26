@@ -9,15 +9,15 @@ img {
     display: block;
     margin: auto;
 }
-section {
+/* section {
     display: flex;
     flex-flow: row wrap;
     max-width: 40vw;
     margin: auto;
     align-items: baseline;
-}
+} */
 
-#clickMeBtn {
+/* #clickMeBtn {
     padding: 5px 20px;
     margin: 10px auto;
     float: right;
@@ -31,4 +31,4 @@ section {
 
 #greeting:empty {
     display: none;
-}
+} */

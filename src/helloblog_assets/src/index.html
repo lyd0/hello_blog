@@ -1,20 +1,96 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
-    <title>helloblog</title>
-    <base href="/">
-
-    <link type="text/css" rel="stylesheet" href="main.css" />
-</head>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <title>helloblog</title>
+        <base href="/">
+        <link type="text/css" rel="stylesheet" href="main.css" />
+        <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    </head>
 <body>
-    <img src="logo.png" alt="DFINITY logo" />
-    <section>
-        <label for="name">Enter your name: &nbsp;</label>
-        <input id="name" alt="Name" type="text" />
-        <button id="clickMeBtn">Click Me!</button>
-    </section>
-    <section id="greeting"></section>
+    
+
+  <div id="app"  v-loading="fullscreenLoading">
+ 
+        <el-row>
+          <el-col :span="24"><img src="logo.png" alt="DFINITY logo" /></el-col>
+        </el-row>
+        
+        <el-row>
+          <el-col :span="24"><h2 style="text-align: center;">Course 5 Blog<em>-- LYD 12</em></h2></el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24"><h5 style="">我的帖子</h5></el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="9" :offset="7">
+            <el-timeline :reverse="false">
+              <el-timeline-item
+                v-for="(msgList, index) in msgList"
+                :key="index"
+                :timestamp="msgList.time">
+                {{msgList.text}}  <em style="float: right; color: blueviolet;">{{msgList.author}}</em>
+              </el-timeline-item>
+            </el-timeline>
+          </el-col>
+        </el-row>
+        <el-divider><i class="el-icon-mobile-phone"></i></el-divider>
+
+        <el-row>
+          <el-col :span="24"><h5 style="">发帖</h5></el-col>
+        </el-row>
+        <el-row :gutter="20">
+          <el-col :span="15"><el-input placeholder="请输入内容" v-model="message" ></el-input></el-col>
+          <el-col :span="6"><el-input placeholder="密码123456" v-model="pswd" show-password></el-input></el-col>
+          <el-col :span="3"><el-button @click="post">Post</el-button></el-col>
+        </el-row>
+
+
+        <!-- <el-divider><i class="el-icon-mobile-phone"></i></el-divider>
+        <el-row>
+          <el-col :span="24"><h5 style="">关注</h5></el-col>
+        </el-row>
+
+        <el-row :gutter="20">
+          <el-col :span="21"><el-input placeholder="请输入关注对象" v-model="people" ></el-input></el-col>
+          <el-col :span="3"><el-button @click="follow">关注</el-button></el-col>
+        </el-row> -->
+         <el-divider><i class="el-icon-mobile-phone"></i></el-divider>
+        <el-row>
+          <el-col :span="24"><h5 style="">Followings</h5></el-col>
+        </el-row>
+
+        <el-row>
+          <el-col v-for="f in followList" :span="12" :offset="6">
+            <span style="color:salmon;">{{f.toString()}}</span>
+            <el-button @click="load_posts(f)">查看</el-button>
+          </el-col>
+      </el-row>
+      
+      
+
+
+      <el-dialog :visible.sync="tipVis" title="Blog Tips">
+        <p>{{tips}}</p>
+        </el-dialog>
+
+    <el-dialog :visible.sync="visible" title="Blog Tips">
+      <el-row>
+        <el-timeline :reverse="false">
+          <el-timeline-item
+            v-for="(msgList, index) in followMsgList"
+            :key="index"
+            :timestamp="msgList.time">
+            {{msgList.text}}  <em style="float: right; color: blueviolet;">{{msgList.author}}</em>
+          </el-timeline-item>
+        </el-timeline>
+      </el-row>
+      </el-dialog>
+  </div>
 </body>
+
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 </html>
